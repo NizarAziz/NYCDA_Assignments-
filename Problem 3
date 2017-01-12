@@ -1,0 +1,6 @@
+def join_strings(string_1, string_2)
+  bridge = string_1 + " " + string_2
+  bridge
+end
+
+puts join_strings("Hey", "buddy!")
