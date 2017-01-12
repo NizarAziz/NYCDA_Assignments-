@@ -1,0 +1,3 @@
+#Puts is a method that prints its given input to the console/terminal. 
+#Return is a keyword that implements and concludes a method in Ruby, returning the sum.
+
