@@ -1,0 +1,9 @@
+def add(a, b)
+    return a + b 
+ end
+
+puts add(1, 2)
+
+storage = add(2, 3)
+
+puts storage
