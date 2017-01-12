@@ -1,0 +1,36 @@
+ def full_name(first_name, last_name, title)
+    # defining a method with arguments first_name, last_name, title
+ name = nil
+    #declares uninitialized variable "name", assigning it to nil 
+
+if title && first_name && last_name
+ #if method is called with title, first_name, and last_name, then this will occur: 
+    name = title + ' ' + first_name + ' ' + last_name
+     # name variable linking together title, first_name, and last_name to appear on same line
+    
+ elsif title && last_name
+ # if nil or false is passed to first_name, this will launch:
+    name = title + ' ' + last_name
+    # linking together arguments title and last_name 
+    
+ elsif first_name && last_name
+  # nil or false is passed to title, then this will launch:
+    name = first_name + ' ' + last_name
+    # links together arguments first_name and last_name 
+ 
+ elsif first_name
+ # if nil or false is passed to last_name and title, then this will launch:
+    name = first_name
+    # assigns first_name to variable name
+    
+ else
+ #if none of the other statements above are implemented, this will run.
+    raise "That doesn't look like a name!"
+    #prints an error message
+ 
+ end
+
+  return(name)
+  # returns name / the arguments that were passed to it.
+
+end
