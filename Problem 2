@@ -1,0 +1,31 @@
+class Homework
+
+  def shout(exclamation)
+    return exclamation.upcase
+  end
+
+  def repeat_string(string, number)
+    repeat_array = []
+    for i in 0...number
+      repeat_array << string
+    end
+    return repeat_array
+  end
+
+  def calendar(holidays, dates)
+    holiday_hash = {}
+    for i in 0...holidays.length
+      holiday_hash[holidays[i]] = dates[i]
+    end
+    puts "Nino's Best Holidays of the Year - 2017"
+    return holiday_hash
+  end
+  
+end
+
+do_it = Homework.new
+
+puts do_it.shout("We will create something special with RUBY!").repeat_string("Hello, Friend", 6)
+puts do_it.repeat_string("Hello, Friend", 6)
+puts do_it.calendar(["Casual Day", "Wear Pink Day", "Baseball Cap Day", "Sushi Celebration", "No Carbs Monday"], ["1/2/17", "2/17/17", "3/16/17", "5/10/17", "12/12/17"])
+
