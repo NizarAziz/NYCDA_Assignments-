@@ -1,0 +1,3 @@
+1). Instance Variable: One type of variable that can occur within a CLASS. They are available throughout the class for each instance of an object of that CLASS and is accessible to ALL the methods within that CLASS as well as for each object of that Class.
+
+2). Times method of the integer CLASS: A method where the code can be looped, the method name times is preceded by a number and by a block of code. The preceding number describes the number of times that the succeeding block of code will be executed, if the placeholder variable is present in the block then it will be incremented by 1 for each iteration of the block. 
