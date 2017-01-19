@@ -1,0 +1,28 @@
+#Two methods that ascend a sequence of numbers and strings.  When numbers are divisible by 3, the program prints "Fizz"; When the numbers are divisible by 5, the program prints "Buzz"; When thenumbers are divisible by both 3 and 5, which is 15, the program prints "FizzBuzz". 
+#Initiates the fizzbuzz method, which takes one parameter
+def fizzbuzz(num)
+  #Initiates the case statement, which is a variation of IF/ELSIF/ELSE conditional statements
+  case
+  #When a number is divisible byboth 3 and 5, PRINT "FizzBuzz"
+  when num % 15 == 0 then "FizzBuzz"
+  #When a number is divisible by 3, PRINT "Fizz"
+  when num % 3  == 0 then "Fizz"
+  #When a number is divisible by 5, PRINT "Buzz"
+  when num % 5  == 0 then "Buzz"
+  #When a number NOT DIVISIBLE BY 3 OR 5, PRINT THE NUMBER 
+  else num
+  #ENDS THE case STATEMENT
+  end
+#ENDS THE FIZZBUZZ METHODS
+end
+
+#Initiaties the fizz_buzz_to METHOD. Contains ONE PARAMETER, limit, Which is the user input provided when calling the method.
+def fizz_buzz_to(limit)
+  #Initiates an each LOOP that begins AT 1, and counts up through limit AND for each number between 1 AND limit, then DO the following...
+  1.upto(limit).each do |num|
+    #Calls the method, fizzbuzz, which passses the corresponding number(tested by divisibilty by 3 and 5) from the 'each' loop and provides the result(number or string) to the terminal.PASSES THE CORRESPONDING NUMBER FROM THE each LOOP AS THE PARAMETER (THE NUMBER THAT WILL BE TESTED FOR DIVISIBILITY BY 3 AND 5), AND puts THE RESULT (NUMBER OR STRING) TO THE TERMINAL
+    puts fizzbuzz(num)
+  #ENDS THE each LOOP
+  end
+#ENDS THE fizz_buzz_to METHOD
+end
