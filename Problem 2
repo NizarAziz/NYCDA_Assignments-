@@ -1,0 +1,24 @@
+class Animal
+    
+    def speak()
+        puts "People always complaining about all the barking,  but I am deaf so it makes no difference to me!"
+    end
+  
+end
+
+class Cat < Animal
+end
+
+class Dog < Animal
+    
+    def speak()
+        puts "Ruff, Ruff..."
+    end
+
+end
+
+cat = Cat.new
+cat.speak
+
+dog = Dog.new
+dog.speak
