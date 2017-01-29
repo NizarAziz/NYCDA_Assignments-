@@ -1,0 +1,2 @@
+GET: Submits to request data from the resource(server) 
+POST: Submits to change or add data to the resource(server)
