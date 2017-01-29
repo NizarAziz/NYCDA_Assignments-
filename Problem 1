@@ -1,0 +1,19 @@
+class Utility
+
+    def self.count_words(string)
+        string.downcase!
+        string.tr!(',', '')
+        string.tr!('.', '')
+        string_array = string.split(' ')
+        string_hash = Hash.new(0)
+        
+        string_array.each do |word|
+            string_hash[word] += 1
+        end
+        
+        return string_hash
+    end
+    
+end
+
+puts Utility.count_words("It was the best of times, it was the worst of times.")
