@@ -1,12 +1,16 @@
 class Animal
-    
+    def sound ()
+    puts " make a funky sound..."
     def speak()
-        puts "People always complaining about all the barking,  but I am deaf so it makes no difference to me!"
+        puts "The animal says:"
+        return sound
     end
   
 end
 
 class Cat < Animal
+    def speak ()
+    puts "I am suppose to meow..."
 end
 
 class Dog < Animal
@@ -17,8 +21,10 @@ class Dog < Animal
 
 end
 
-cat = Cat.new
-cat.speak
+    cat = Cat.new
+        cat.speak
 
-dog = Dog.new
-dog.speak
+    dog = Dog.new
+        dog.speak
+    end
+end
