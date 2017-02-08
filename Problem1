@@ -1,0 +1,33 @@
+Website:Yelp
+ActiveRecord::Schema.define(version: 20170208224958) do
+
+  create_table "businesses", force: :cascade do |t|
+    t.string   "full_business_name"
+    t.string   "full_address"
+    t.string   "city"
+    t.string   "state"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.integer  "user_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "stars"
+    t.string   "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "supermarket_name"
+    t.string   "category"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+end
