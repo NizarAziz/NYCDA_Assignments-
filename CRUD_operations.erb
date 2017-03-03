@@ -1,0 +1,30 @@
+<!-- #Rails Console CRUD operations -->
+user = User.new(name: "Nino", email: "nino@baloof.com")
+
+user.name = "Nino"
+
+user.save
+
+User.create(name: "donkey", email: "donkey@kong.com")
+
+User.all
+
+User.last
+
+User.find(1)
+
+user = User.find(2)
+
+user.update_attribute(:name, "kong")
+
+### MORE Rails Console CRUD operations
+
+user = User.create(name: "Rico", email: "rico@suave.com")
+
+user.save
+
+user.update_attribute(:email "rico@notsosuave.com")
+
+user.find(1)
+
+user.destroy(2)
