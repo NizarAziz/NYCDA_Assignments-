@@ -14,12 +14,42 @@
  *= require_self
  */
 
-.w_on_b {
-	color: white;
-	background-color: black;
+body {
+	background-color: white
 }
 
-.default {
-	color: black;
-	background-color: white;
+
+.day {
+	background-color: #000;
+	color: white;
+	width: 60px;
+	height: 40px;
+	font-size: 150%;
+	font-weight: bold;
+	text-align: center;
+	line-height: 40px;
 }
+
+.month {
+	background-color: yellow;
+	color: black;
+	width: 60px;
+	height: 20px;
+	text-align: center;
+	font-weight: bold;
+	line-height: 20px;
+}
+
+.time {
+	background-color: yellow;
+	color: green;
+	width: 80px;
+	font-weight: bold;
+	border-style: solid;
+	border-width: 3px;
+	border-color: silver;
+	border-radius: 8px;
+	padding: 3px;
+}
+
+

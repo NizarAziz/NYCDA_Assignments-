@@ -1,50 +1,27 @@
-  [1m[36m (2.5ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
-  [1m[35m (24.5ms)[0m  select sqlite_version(*)
-  [1m[36m (2.1ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
-  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
-Migrating to CreatePosts (20160629185520)
+  [1m[36m (3.4ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.2ms)[0m  select sqlite_version(*)
+  [1m[36m (2.3ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateEvents (20160711194110)
   [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
-  [1m[35m (0.6ms)[0m  CREATE TABLE "posts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "author" varchar, "title" varchar, "image_url" varchar, "text" text, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
-  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160629185520"]]
-  [1m[35m (2.3ms)[0m  commit transaction
-Migrating to AddTheme (20160629200415)
+  [1m[35m (0.7ms)[0m  CREATE TABLE "events" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "descritption" text, "date" datetime, "location" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160711194110"]]
+  [1m[35m (2.7ms)[0m  commit transaction
+Migrating to FixDescriptionSpelling (20160711202145)
   [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
-  [1m[35m (33.2ms)[0m  ALTER TABLE "posts" ADD "theme" varchar
-  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160629200415"]]
-  [1m[35m (2.1ms)[0m  commit transaction
-Migrating to ChangeNameToUser (20160706185712)
-  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
-  [1m[35m (0.6ms)[0m  CREATE TEMPORARY TABLE "aposts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "author" varchar, "title" varchar, "image_url" varchar, "text" text, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "theme" varchar) 
-  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "posts"[0m
-  [1m[35m (1.4ms)[0m  DROP TABLE "posts"
-  [1m[36m (0.8ms)[0m  [1mCREATE TABLE "posts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "image_url" varchar, "text" text, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "theme" varchar) [0m
-  [1m[35m (0.1ms)[0m  SELECT * FROM "aposts"
-  [1m[36m (0.6ms)[0m  [1mDROP TABLE "aposts"[0m
-  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160706185712"]]
-  [1m[36m (2.9ms)[0m  [1mcommit transaction[0m
-Migrating to CreateUsers (20160706190256)
-  [1m[35m (0.1ms)[0m  begin transaction
-  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "username" varchar, "password" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
-  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160706190256"]]
-  [1m[36m (2.7ms)[0m  [1mcommit transaction[0m
-Migrating to AddUserToPost (20160706190607)
-  [1m[35m (0.1ms)[0m  begin transaction
-  [1m[36m (0.7ms)[0m  [1mALTER TABLE "posts" ADD "user" belongs_to[0m
-  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160706190607"]]
-  [1m[36m (2.0ms)[0m  [1mcommit transaction[0m
-Migrating to AddDeviseToUsers (20160708144650)
-  [1m[35m (0.1ms)[0m  begin transaction
-  [1m[36m (0.6ms)[0m  [1mALTER TABLE "users" ADD "email" varchar DEFAULT '' NOT NULL[0m
-  [1m[35m (0.3ms)[0m  ALTER TABLE "users" ADD "encrypted_password" varchar DEFAULT '' NOT NULL
-  [1m[36m (0.2ms)[0m  [1mALTER TABLE "users" ADD "reset_password_token" varchar[0m
-  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD "reset_password_sent_at" datetime
-  [1m[36m (0.1ms)[0m  [1mALTER TABLE "users" ADD "remember_created_at" datetime[0m
-  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD "sign_in_count" integer DEFAULT 0 NOT NULL
-  [1m[36m (0.2ms)[0m  [1mALTER TABLE "users" ADD "current_sign_in_at" datetime[0m
-  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD "last_sign_in_at" datetime
-  [1m[36m (0.2ms)[0m  [1mALTER TABLE "users" ADD "current_sign_in_ip" varchar[0m
-  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD "last_sign_in_ip" varchar
-  [1m[36m (0.5ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "events" ADD "description" text
+  [1m[36m (0.7ms)[0m  [1mCREATE TEMPORARY TABLE "aevents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "descritption" text, "date" datetime, "location" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "description" text) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "events"
+  [1m[36m (2.9ms)[0m  [1mDROP TABLE "events"[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "events" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "date" datetime, "location" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "description" text) 
+  [1m[36m (0.1ms)[0m  [1mSELECT * FROM "aevents"[0m
+  [1m[35m (0.4ms)[0m  DROP TABLE "aevents"
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20160711202145"]]
+  [1m[35m (3.5ms)[0m  commit transaction
+Migrating to DeviseCreateUsers (20160713144916)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.8ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.7ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
   [1m[35m (0.1ms)[0m              SELECT sql
             FROM sqlite_master
             WHERE name='index_users_on_email' AND type='index'
@@ -54,31 +31,18 @@ Migrating to AddDeviseToUsers (20160708144650)
             WHERE name='index_users_on_email' AND type='index'
 
   [1m[36m (0.2ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
-  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160708144650"]]
-  [1m[36m (3.3ms)[0m  [1mcommit transaction[0m
-Migrating to AddUserIdToPosts (20160708153805)
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160713144916"]]
+  [1m[36m (3.2ms)[0m  [1mcommit transaction[0m
+Migrating to EventUserAssociation (20160713145511)
   [1m[35m (0.1ms)[0m  begin transaction
-  [1m[36m (0.6ms)[0m  [1mALTER TABLE "posts" ADD "user_id" integer[0m
-  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160708153805"]]
-  [1m[36m (1.7ms)[0m  [1mcommit transaction[0m
-  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
-  [1m[36m (0.1ms)[0m  [1m            SELECT sql
-            FROM sqlite_master
-            WHERE name='index_users_on_reset_password_token' AND type='index'
-            UNION ALL
-            SELECT sql
-            FROM sqlite_temp_master
-            WHERE name='index_users_on_reset_password_token' AND type='index'
-[0m
-  [1m[35m (0.1ms)[0m              SELECT sql
-            FROM sqlite_master
-            WHERE name='index_users_on_email' AND type='index'
-            UNION ALL
-            SELECT sql
-            FROM sqlite_temp_master
-            WHERE name='index_users_on_email' AND type='index'
-
-  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "events" ADD "user" belongs_to[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160713145511"]]
+  [1m[36m (2.0ms)[0m  [1mcommit transaction[0m
+Migrating to ChangeUserToUserIs (20160713152305)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "events" ADD "user_id" integer[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160713152305"]]
+  [1m[36m (3.2ms)[0m  [1mcommit transaction[0m
   [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
   [1m[36m (0.2ms)[0m  [1m            SELECT sql
             FROM sqlite_master
@@ -88,7 +52,7 @@ Migrating to AddUserIdToPosts (20160708153805)
             FROM sqlite_temp_master
             WHERE name='index_users_on_reset_password_token' AND type='index'
 [0m
-  [1m[35m (0.1ms)[0m              SELECT sql
+  [1m[35m (0.2ms)[0m              SELECT sql
             FROM sqlite_master
             WHERE name='index_users_on_email' AND type='index'
             UNION ALL
@@ -98,204 +62,374 @@ Migrating to AddUserIdToPosts (20160708153805)
 
 
 
-Started GET "/" for ::1 at 2017-03-03 11:36:56 -0500
-  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
-Processing by HomeController#index as HTML
-  Rendered home/index.html.erb within layouts/application (23.8ms)
-Completed 200 OK in 2728ms (Views: 2695.4ms | ActiveRecord: 0.0ms)
+Started GET "/" for ::1 at 2017-03-03 12:08:54 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by AuthorizationIndependentController#index as HTML
+  [1m[35mEvent Load (0.3ms)[0m  SELECT "events".* FROM "events"
+  Rendered partials/_events.html.erb (3.4ms)
+  Rendered authorization_independent/index.html.erb within layouts/application (58.0ms)
+Completed 200 OK in 1824ms (Views: 1704.8ms | ActiveRecord: 0.4ms)
 
 
-Started GET "/assets/application.self-1ff97c554820ea822fe46d454817f1376c60292a36ab0dfaae56c669d1b3646b.css?body=1" for ::1 at 2017-03-03 11:37:00 -0500
+Started GET "/assets/event.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-03-03 12:08:56 -0500
 
 
-Started GET "/users/sign_in" for ::1 at 2017-03-03 11:37:06 -0500
+Started GET "/assets/authorization_independent.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2017-03-03 12:08:56 -0500
+
+
+Started GET "/assets/event.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2017-03-03 12:08:56 -0500
+
+
+Started GET "/assets/application.self-1e2a1cdec1d903d7272ef3f7b951a0c5a7e792c0f106076cec5dc60ac3e67921.css?body=1" for ::1 at 2017-03-03 12:08:56 -0500
+
+
+Started GET "/assets/authorization_independent.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-03-03 12:08:56 -0500
+
+
+Started GET "/events/new" for ::1 at 2017-03-03 12:09:04 -0500
+Processing by EventsController#new as HTML
+Completed 401 Unauthorized in 31ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for ::1 at 2017-03-03 12:09:04 -0500
 Processing by Devise::SessionsController#new as HTML
-  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/shared/_links.html.erb (3.4ms)
-  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/sessions/new.html.erb within layouts/application (259.0ms)
-Completed 200 OK in 361ms (Views: 313.9ms | ActiveRecord: 0.7ms)
+  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/shared/_links.html.erb (1.8ms)
+  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/sessions/new.html.erb within layouts/application (59.8ms)
+Completed 200 OK in 198ms (Views: 140.6ms | ActiveRecord: 0.6ms)
 
 
-Started GET "/users/sign_up" for ::1 at 2017-03-03 11:37:14 -0500
-Processing by Devise::RegistrationsController#new as HTML
-  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/shared/_links.html.erb (0.6ms)
-  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/registrations/new.html.erb within layouts/application (10.2ms)
-Completed 200 OK in 73ms (Views: 70.5ms | ActiveRecord: 0.0ms)
+Started GET "/events" for ::1 at 2017-03-03 12:09:06 -0500
+Processing by EventsController#index as HTML
+Completed 401 Unauthorized in 7ms (ActiveRecord: 0.0ms)
 
 
-Started POST "/users" for ::1 at 2017-03-03 11:39:47 -0500
-Processing by Devise::RegistrationsController#create as HTML
-  Parameters: {"utf8"=>"✓", "authenticity_token"=>"nrZsz3e14fYftYlU7+C2rFtTmObam8enxL1OZMg8K/Bj3sjRTTyfeee8OTzFQ6fTOn224nxLqS1GLCQ5dQkv5w==", "user"=>{"email"=>"ninoothman44@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
-  [1m[35m (0.2ms)[0m  begin transaction
-  [1m[36mUser Exists (19.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'ninoothman44@gmail.com' LIMIT 1[0m
-  [1m[35m (16.0ms)[0m  rollback transaction
+Started GET "/users/sign_in" for ::1 at 2017-03-03 12:09:06 -0500
+Processing by Devise::SessionsController#new as HTML
   Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/shared/_links.html.erb (0.4ms)
-  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/registrations/new.html.erb within layouts/application (12.3ms)
-Completed 200 OK in 918ms (Views: 155.1ms | ActiveRecord: 35.3ms)
+  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/sessions/new.html.erb within layouts/application (16.0ms)
+Completed 200 OK in 135ms (Views: 92.8ms | ActiveRecord: 0.0ms)
 
 
-Started POST "/users" for ::1 at 2017-03-03 11:39:58 -0500
-Processing by Devise::RegistrationsController#create as HTML
-  Parameters: {"utf8"=>"✓", "authenticity_token"=>"rOhiblvSni9hXZd/2Prf9NIEeFbf6yXmgv6NhmseZ+1RgMZwYVvgoJlUJxfyWc6LsypWUnk7S2wAb+fb1itj+g==", "user"=>{"email"=>"ninoothman44@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
-  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
-  [1m[35mUser Exists (0.2ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'ninoothman44@gmail.com' LIMIT 1
-  [1m[36mSQL (24.3ms)[0m  [1mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["email", "ninoothman44@gmail.com"], ["encrypted_password", "$2a$11$XXk8jZawajud9buzqNY1BewHbJ7DBM8gZQHN0MSBpErl4zIuzkrwK"], ["created_at", "2017-03-03 16:39:59.202156"], ["updated_at", "2017-03-03 16:39:59.202156"]]
-  [1m[35m (8.1ms)[0m  commit transaction
-  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
-  [1m[35mSQL (0.5ms)[0m  UPDATE "users" SET "last_sign_in_at" = ?, "current_sign_in_at" = ?, "last_sign_in_ip" = ?, "current_sign_in_ip" = ?, "sign_in_count" = ?, "updated_at" = ? WHERE "users"."id" = ?  [["last_sign_in_at", "2017-03-03 16:39:59.249576"], ["current_sign_in_at", "2017-03-03 16:39:59.249576"], ["last_sign_in_ip", "::1"], ["current_sign_in_ip", "::1"], ["sign_in_count", 1], ["updated_at", "2017-03-03 16:39:59.251554"], ["id", 1]]
-  [1m[36m (2.5ms)[0m  [1mcommit transaction[0m
-Redirected to http://localhost:3000/
-Completed 302 Found in 354ms (ActiveRecord: 35.9ms)
+Started GET "/" for ::1 at 2017-03-03 12:09:08 -0500
+Processing by AuthorizationIndependentController#index as HTML
+  [1m[36mEvent Load (0.2ms)[0m  [1mSELECT "events".* FROM "events"[0m
+  Rendered partials/_events.html.erb (0.9ms)
+  Rendered authorization_independent/index.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 142ms (Views: 126.5ms | ActiveRecord: 0.2ms)
 
 
-Started GET "/" for ::1 at 2017-03-03 11:39:59 -0500
-Processing by HomeController#index as HTML
-  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
-  Rendered home/index.html.erb within layouts/application (9.0ms)
-Completed 200 OK in 113ms (Views: 110.7ms | ActiveRecord: 0.3ms)
-
-
-Started GET "/" for ::1 at 2017-03-03 11:41:10 -0500
-Processing by HomeController#index as HTML
-  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
-  Rendered home/index.html.erb within layouts/application (20.2ms)
-Completed 200 OK in 270ms (Views: 266.6ms | ActiveRecord: 0.3ms)
-
-
-Started DELETE "/users/sign_out" for ::1 at 2017-03-03 11:41:22 -0500
-Processing by Devise::SessionsController#destroy as HTML
-  Parameters: {"authenticity_token"=>"vCLBEDchb/F8WIwMf4XT/PiG7oODfmKYMT3Vw4jsE5hBSmUODagRfoRRPGRVJsKDmajAhyWuDBKzrL+eNdkXjw=="}
-  [1m[35mUser Load (1.6ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
-  [1m[36m (2.3ms)[0m  [1mbegin transaction[0m
-  [1m[35m (0.1ms)[0m  commit transaction
-Redirected to http://localhost:3000/
-Completed 302 Found in 86ms (ActiveRecord: 4.0ms)
-
-
-Started GET "/" for ::1 at 2017-03-03 11:41:23 -0500
-Processing by HomeController#index as HTML
-  Rendered home/index.html.erb within layouts/application (2.0ms)
-Completed 200 OK in 159ms (Views: 156.5ms | ActiveRecord: 0.0ms)
-
-
-Started GET "/show" for ::1 at 2017-03-03 11:41:31 -0500
-
-ActionController::RoutingError (No route matches [GET] "/show"):
-  actionpack (4.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
-  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
-  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
-  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
-  railties (4.2.6) lib/rails/rack/logger.rb:38:in `call_app'
-  railties (4.2.6) lib/rails/rack/logger.rb:20:in `block in call'
-  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
-  activesupport (4.2.6) lib/active_support/tagged_logging.rb:26:in `tagged'
-  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `tagged'
-  railties (4.2.6) lib/rails/rack/logger.rb:20:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
-  rack (1.6.5) lib/rack/methodoverride.rb:22:in `call'
-  rack (1.6.5) lib/rack/runtime.rb:18:in `call'
-  activesupport (4.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
-  rack (1.6.5) lib/rack/lock.rb:17:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/static.rb:120:in `call'
-  rack (1.6.5) lib/rack/sendfile.rb:113:in `call'
-  railties (4.2.6) lib/rails/engine.rb:518:in `call'
-  railties (4.2.6) lib/rails/application.rb:165:in `call'
-  rack (1.6.5) lib/rack/lock.rb:17:in `call'
-  rack (1.6.5) lib/rack/content_length.rb:15:in `call'
-  rack (1.6.5) lib/rack/handler/webrick.rb:88:in `service'
-  /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
-  /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
-  /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
-
-
-  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.2ms)
-  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (4.0ms)
-  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (289.0ms)
-  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (3.0ms)
-  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (532.2ms)
-  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.9ms)
-  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.6ms)
-  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (1.8ms)
-  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.6ms)
-  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (142.4ms)
-  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.5ms)
-  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.7ms)
-  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (329.9ms)
-
-
-Started GET "/" for ::1 at 2017-03-03 11:41:39 -0500
-Processing by HomeController#index as HTML
-  Rendered home/index.html.erb within layouts/application (0.7ms)
-Completed 200 OK in 174ms (Views: 173.3ms | ActiveRecord: 0.0ms)
-
-
-Started GET "/" for ::1 at 2017-03-03 11:41:42 -0500
-Processing by HomeController#index as HTML
-  Rendered home/index.html.erb within layouts/application (0.8ms)
-Completed 200 OK in 93ms (Views: 91.6ms | ActiveRecord: 0.0ms)
-
-
-Started GET "/posts" for ::1 at 2017-03-03 11:41:44 -0500
-Processing by PostsController#index as HTML
-Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
-
-
-Started GET "/users/sign_in" for ::1 at 2017-03-03 11:41:44 -0500
-Processing by Devise::SessionsController#new as HTML
-  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/shared/_links.html.erb (0.6ms)
-  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/sessions/new.html.erb within layouts/application (36.2ms)
-Completed 200 OK in 114ms (Views: 110.6ms | ActiveRecord: 0.0ms)
-
-
-Started GET "/" for ::1 at 2017-03-03 11:41:46 -0500
-Processing by HomeController#index as HTML
-  Rendered home/index.html.erb within layouts/application (0.6ms)
-Completed 200 OK in 94ms (Views: 93.4ms | ActiveRecord: 0.0ms)
-
-
-Started GET "/posts" for ::1 at 2017-03-03 11:41:50 -0500
-Processing by PostsController#index as HTML
+Started GET "/events" for ::1 at 2017-03-03 12:09:11 -0500
+Processing by EventsController#index as HTML
 Completed 401 Unauthorized in 2ms (ActiveRecord: 0.0ms)
 
 
-Started GET "/users/sign_in" for ::1 at 2017-03-03 11:41:50 -0500
+Started GET "/users/sign_in" for ::1 at 2017-03-03 12:09:12 -0500
 Processing by Devise::SessionsController#new as HTML
-  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/shared/_links.html.erb (0.4ms)
-  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/sessions/new.html.erb within layouts/application (7.2ms)
-Completed 200 OK in 57ms (Views: 55.2ms | ActiveRecord: 0.0ms)
+  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/shared/_links.html.erb (0.5ms)
+  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/sessions/new.html.erb within layouts/application (8.9ms)
+Completed 200 OK in 98ms (Views: 95.6ms | ActiveRecord: 0.0ms)
 
 
-Started GET "/" for ::1 at 2017-03-03 11:41:53 -0500
-Processing by HomeController#index as HTML
-  Rendered home/index.html.erb within layouts/application (0.7ms)
-Completed 200 OK in 74ms (Views: 69.3ms | ActiveRecord: 0.0ms)
+Started GET "/events/new" for ::1 at 2017-03-03 12:09:13 -0500
+Processing by EventsController#new as HTML
+Completed 401 Unauthorized in 7ms (ActiveRecord: 0.0ms)
 
 
-Started GET "/posts" for ::1 at 2017-03-03 11:41:54 -0500
-Processing by PostsController#index as HTML
-Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+Started GET "/users/sign_in" for ::1 at 2017-03-03 12:09:13 -0500
+Processing by Devise::SessionsController#new as HTML
+  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/shared/_links.html.erb (0.5ms)
+  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/sessions/new.html.erb within layouts/application (9.1ms)
+Completed 200 OK in 92ms (Views: 90.3ms | ActiveRecord: 0.0ms)
 
 
-Started GET "/users/sign_in" for ::1 at 2017-03-03 11:41:54 -0500
+Started GET "/users/sign_in" for ::1 at 2017-03-03 12:09:14 -0500
+Processing by Devise::SessionsController#new as HTML
+  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/shared/_links.html.erb (0.5ms)
+  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/sessions/new.html.erb within layouts/application (12.2ms)
+Completed 200 OK in 72ms (Views: 68.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_up" for ::1 at 2017-03-03 12:09:16 -0500
+Processing by Devise::RegistrationsController#new as HTML
+  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/shared/_links.html.erb (0.6ms)
+  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/registrations/new.html.erb within layouts/application (8.5ms)
+Completed 200 OK in 65ms (Views: 63.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for ::1 at 2017-03-03 12:09:31 -0500
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"JE1WvJK8H+LlqHfdvJMQUXcM4xTZ5mhlKVZCQ8zmJlGiFDMz5LAynAcrGWmLLcXbinDZIFPeZIZ+EaZuSNSbIQ==", "user"=>{"email"=>"ninoothman44@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (14.4ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'ninoothman44@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (9.8ms)[0m  INSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["email", "ninoothman44@gmail.com"], ["encrypted_password", "$2a$11$Z0KXrcwZ7KIhiyQwFNl6o.A/2Qh7w9Dd4b0zG2hcdZczzfUYlVm52"], ["created_at", "2017-03-03 17:09:31.759145"], ["updated_at", "2017-03-03 17:09:31.759145"]]
+  [1m[36m (3.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.6ms)[0m  [1mUPDATE "users" SET "last_sign_in_at" = ?, "current_sign_in_at" = ?, "last_sign_in_ip" = ?, "current_sign_in_ip" = ?, "sign_in_count" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["last_sign_in_at", "2017-03-03 17:09:31.775695"], ["current_sign_in_at", "2017-03-03 17:09:31.775695"], ["last_sign_in_ip", "::1"], ["current_sign_in_ip", "::1"], ["sign_in_count", 1], ["updated_at", "2017-03-03 17:09:31.776560"], ["id", 1]]
+  [1m[35m (1.6ms)[0m  commit transaction
+Redirected to http://localhost:3000/events/new
+Completed 302 Found in 523ms (ActiveRecord: 29.7ms)
+
+
+Started GET "/events/new" for ::1 at 2017-03-03 12:09:31 -0500
+Processing by EventsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  Rendered events/new.html.erb within layouts/application (27.9ms)
+Completed 200 OK in 115ms (Views: 91.5ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/events" for ::1 at 2017-03-03 12:10:31 -0500
+Processing by EventsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"VcoGMY5k8mJbspfrt5tjW1FCG6j0o96k7tRFEST6pWvTk2O++GjfHLkx+V+AJbbRrD4hnH6b0ke5k6E8oMgYGw==", "event"=>{"name"=>"El NIno", "description"=>"park avenue ", "location"=>"New York ", "date"=>"2017-03-03T15:07"}, "commit"=>"create"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.8ms)[0m  INSERT INTO "events" ("name", "description", "location", "date", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)  [["name", "El NIno"], ["description", "park avenue "], ["location", "New York "], ["date", "2017-03-03 15:07:00.000000"], ["user_id", 1], ["created_at", "2017-03-03 17:10:32.031439"], ["updated_at", "2017-03-03 17:10:32.031439"]]
+  [1m[36m (2.1ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/events
+Completed 302 Found in 68ms (ActiveRecord: 3.2ms)
+
+
+Started GET "/events" for ::1 at 2017-03-03 12:10:32 -0500
+Processing by EventsController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mEvent Load (0.2ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."user_id" = 1[0m
+  Rendered partials/_events.html.erb (1.5ms)
+  Rendered events/index.html.erb within layouts/application (11.3ms)
+Completed 200 OK in 158ms (Views: 154.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/events" for ::1 at 2017-03-03 12:10:39 -0500
+Processing by EventsController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mEvent Load (0.2ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."user_id" = 1[0m
+  Rendered partials/_events.html.erb (1.3ms)
+  Rendered events/index.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 91ms (Views: 69.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for ::1 at 2017-03-03 12:10:41 -0500
+Processing by AuthorizationIndependentController#index as HTML
+  [1m[35mEvent Load (0.2ms)[0m  SELECT "events".* FROM "events"
+  Rendered partials/_events.html.erb (4.8ms)
+  Rendered authorization_independent/index.html.erb within layouts/application (7.3ms)
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+Completed 200 OK in 139ms (Views: 137.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/events" for ::1 at 2017-03-03 12:10:42 -0500
+Processing by EventsController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mEvent Load (0.3ms)[0m  [1mSELECT "events".* FROM "events" WHERE "events"."user_id" = 1[0m
+  Rendered partials/_events.html.erb (1.3ms)
+  Rendered events/index.html.erb within layouts/application (5.7ms)
+Completed 200 OK in 59ms (Views: 45.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/events/new" for ::1 at 2017-03-03 12:10:43 -0500
+Processing by EventsController#new as HTML
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  Rendered events/new.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 103ms (Views: 99.6ms | ActiveRecord: 0.3ms)
+
+
+Started DELETE "/users/sign_out" for ::1 at 2017-03-03 12:10:44 -0500
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"CxpCxKjODqj9Wo7eWLJjJqKJmO2EVCYe49A9ZQzkYYGNQydL3sIj1h/Z4GpvDLasX/Wi2Q5sKv20l9lIiNbc8Q=="}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 28ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/" for ::1 at 2017-03-03 12:10:44 -0500
+Processing by AuthorizationIndependentController#index as HTML
+  [1m[35mEvent Load (0.2ms)[0m  SELECT "events".* FROM "events"
+  Rendered partials/_events.html.erb (1.1ms)
+  Rendered authorization_independent/index.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 39ms (Views: 35.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/users/sign_in" for ::1 at 2017-03-03 12:10:48 -0500
 Processing by Devise::SessionsController#new as HTML
   Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/shared/_links.html.erb (0.6ms)
-  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/sessions/new.html.erb within layouts/application (18.1ms)
-Completed 200 OK in 83ms (Views: 81.5ms | ActiveRecord: 0.0ms)
+  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/sessions/new.html.erb within layouts/application (16.9ms)
+Completed 200 OK in 121ms (Views: 119.4ms | ActiveRecord: 0.0ms)
 
 
-Started GET "/posts" for ::1 at 2017-03-03 11:56:00 -0500
-Processing by PostsController#index as HTML
-Completed 401 Unauthorized in 10ms (ActiveRecord: 0.0ms)
-
-
-Started GET "/users/sign_in" for ::1 at 2017-03-03 11:56:00 -0500
+Started GET "/users/sign_in" for ::1 at 2017-03-03 12:39:26 -0500
 Processing by Devise::SessionsController#new as HTML
-  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/shared/_links.html.erb (2.4ms)
-  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/sessions/new.html.erb within layouts/application (24.7ms)
-Completed 200 OK in 294ms (Views: 284.6ms | ActiveRecord: 0.0ms)
+  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/shared/_links.html.erb (1.6ms)
+  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/sessions/new.html.erb within layouts/application (26.6ms)
+Completed 200 OK in 436ms (Views: 373.0ms | ActiveRecord: 0.0ms)
 
 
-Started GET "/" for ::1 at 2017-03-03 11:56:02 -0500
-Processing by HomeController#index as HTML
-  Rendered home/index.html.erb within layouts/application (1.1ms)
-Completed 200 OK in 179ms (Views: 171.7ms | ActiveRecord: 0.0ms)
+Started GET "/users/sign_in" for ::1 at 2017-03-03 12:41:35 -0500
+Processing by Devise::SessionsController#new as HTML
+  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/shared/_links.html.erb (2.7ms)
+  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/sessions/new.html.erb within layouts/application (34.1ms)
+Completed 200 OK in 486ms (Views: 424.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.self-ec3c64a62e74871e48ecc16da09ea12b7e918d800e2ce0a7b6bd668f0a5131ce.css?body=1" for ::1 at 2017-03-03 12:41:36 -0500
+
+
+Started GET "/" for ::1 at 2017-03-03 12:41:51 -0500
+Processing by AuthorizationIndependentController#index as HTML
+  [1m[36mEvent Load (0.9ms)[0m  [1mSELECT "events".* FROM "events"[0m
+  Rendered partials/_events.html.erb (7.0ms)
+  Rendered authorization_independent/index.html.erb within layouts/application (16.0ms)
+Completed 200 OK in 91ms (Views: 88.3ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/events" for ::1 at 2017-03-03 12:41:52 -0500
+Processing by EventsController#index as HTML
+Completed 401 Unauthorized in 5ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for ::1 at 2017-03-03 12:41:53 -0500
+Processing by Devise::SessionsController#new as HTML
+  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/shared/_links.html.erb (0.7ms)
+  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/sessions/new.html.erb within layouts/application (26.7ms)
+Completed 200 OK in 147ms (Views: 144.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/events/new" for ::1 at 2017-03-03 12:41:54 -0500
+Processing by EventsController#new as HTML
+Completed 401 Unauthorized in 12ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for ::1 at 2017-03-03 12:41:54 -0500
+Processing by Devise::SessionsController#new as HTML
+  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/shared/_links.html.erb (0.7ms)
+  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/sessions/new.html.erb within layouts/application (31.3ms)
+Completed 200 OK in 106ms (Views: 104.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2017-03-03 12:41:56 -0500
+Processing by AuthorizationIndependentController#index as HTML
+  [1m[35mEvent Load (0.2ms)[0m  SELECT "events".* FROM "events"
+  Rendered partials/_events.html.erb (1.1ms)
+  Rendered authorization_independent/index.html.erb within layouts/application (15.6ms)
+Completed 200 OK in 191ms (Views: 189.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for ::1 at 2017-03-03 13:07:46 -0500
+Processing by AuthorizationIndependentController#index as HTML
+  [1m[36mEvent Load (1.5ms)[0m  [1mSELECT "events".* FROM "events"[0m
+  Rendered partials/_events.html.erb (16.1ms)
+  Rendered authorization_independent/index.html.erb within layouts/application (21.1ms)
+Completed 200 OK in 276ms (Views: 266.5ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/events" for ::1 at 2017-03-03 13:07:48 -0500
+Processing by EventsController#index as HTML
+Completed 401 Unauthorized in 2ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for ::1 at 2017-03-03 13:07:49 -0500
+Processing by Devise::SessionsController#new as HTML
+  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/shared/_links.html.erb (1.2ms)
+  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/sessions/new.html.erb within layouts/application (14.6ms)
+Completed 200 OK in 143ms (Views: 125.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for ::1 at 2017-03-03 13:07:50 -0500
+Processing by Devise::SessionsController#new as HTML
+  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/shared/_links.html.erb (0.6ms)
+  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/sessions/new.html.erb within layouts/application (47.4ms)
+Completed 200 OK in 106ms (Views: 100.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/events/new" for ::1 at 2017-03-03 13:07:52 -0500
+Processing by EventsController#new as HTML
+Completed 401 Unauthorized in 22ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for ::1 at 2017-03-03 13:07:52 -0500
+Processing by Devise::SessionsController#new as HTML
+  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/shared/_links.html.erb (1.8ms)
+  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/sessions/new.html.erb within layouts/application (10.9ms)
+Completed 200 OK in 77ms (Views: 75.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2017-03-03 13:07:53 -0500
+Processing by AuthorizationIndependentController#index as HTML
+  [1m[35mEvent Load (0.3ms)[0m  SELECT "events".* FROM "events"
+  Rendered partials/_events.html.erb (1.6ms)
+  Rendered authorization_independent/index.html.erb within layouts/application (14.8ms)
+Completed 200 OK in 120ms (Views: 118.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/events" for ::1 at 2017-03-03 13:07:53 -0500
+Processing by EventsController#index as HTML
+Completed 401 Unauthorized in 2ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for ::1 at 2017-03-03 13:07:53 -0500
+Processing by Devise::SessionsController#new as HTML
+  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/shared/_links.html.erb (0.5ms)
+  Rendered /Users/go2najaf/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/devise-4.2.0/app/views/devise/sessions/new.html.erb within layouts/application (8.3ms)
+Completed 200 OK in 76ms (Views: 74.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2017-03-03 13:07:54 -0500
+Processing by AuthorizationIndependentController#index as HTML
+  [1m[36mEvent Load (0.2ms)[0m  [1mSELECT "events".* FROM "events"[0m
+  Rendered partials/_events.html.erb (1.2ms)
+  Rendered authorization_independent/index.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 67ms (Views: 37.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for ::1 at 2017-03-03 14:16:10 -0500
+Processing by AuthorizationIndependentController#index as HTML
+  [1m[35mEvent Load (1.2ms)[0m  SELECT "events".* FROM "events"
+  Rendered partials/_events.html.erb (17.7ms)
+  Rendered authorization_independent/index.html.erb within layouts/application (23.0ms)
+Completed 200 OK in 385ms (Views: 375.9ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/assets/application.self-06c5415314d49beffed8fdcb5e84ee200143590a9344f795f2d486b6900d5d47.css?body=1" for ::1 at 2017-03-03 14:16:11 -0500
+
+
+Started GET "/" for ::1 at 2017-03-03 14:16:45 -0500
+Processing by AuthorizationIndependentController#index as HTML
+  [1m[36mEvent Load (0.3ms)[0m  [1mSELECT "events".* FROM "events"[0m
+  Rendered partials/_events.html.erb (1.5ms)
+  Rendered authorization_independent/index.html.erb within layouts/application (8.2ms)
+Completed 200 OK in 87ms (Views: 85.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.self-7a554c8671e8da164d34f870d2a018ec9f8ff46803cbb4d612b4399608baf6d0.css?body=1" for ::1 at 2017-03-03 14:16:46 -0500
+
+
+Started GET "/" for ::1 at 2017-03-03 14:17:05 -0500
+Processing by AuthorizationIndependentController#index as HTML
+  [1m[35mEvent Load (0.3ms)[0m  SELECT "events".* FROM "events"
+  Rendered partials/_events.html.erb (1.5ms)
+  Rendered authorization_independent/index.html.erb within layouts/application (10.2ms)
+Completed 200 OK in 175ms (Views: 173.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.self-e460fbc289d7a38ee00078b5c5cc8c9f1ca026d85de1b8f5badbb11b32f3b101.css?body=1" for ::1 at 2017-03-03 14:17:05 -0500
+
+
+Started GET "/" for ::1 at 2017-03-03 14:17:28 -0500
+Processing by AuthorizationIndependentController#index as HTML
+  [1m[36mEvent Load (0.2ms)[0m  [1mSELECT "events".* FROM "events"[0m
+  Rendered partials/_events.html.erb (1.2ms)
+  Rendered authorization_independent/index.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 213ms (Views: 211.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.self-c7d4494ed1710a195b80c42b7650948c7cbaa9152d84c470ed646fc3ea2c44fa.css?body=1" for ::1 at 2017-03-03 14:17:28 -0500
+
+
+Started GET "/" for ::1 at 2017-03-03 14:18:17 -0500
+Processing by AuthorizationIndependentController#index as HTML
+  [1m[35mEvent Load (0.2ms)[0m  SELECT "events".* FROM "events"
+  Rendered partials/_events.html.erb (1.4ms)
+  Rendered authorization_independent/index.html.erb within layouts/application (5.9ms)
+Completed 200 OK in 247ms (Views: 245.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.self-a5daed47179218244cdc50a3f48d1f2177b2cf2d53eb0963a80d88dfa9262a2d.css?body=1" for ::1 at 2017-03-03 14:18:17 -0500
