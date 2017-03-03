@@ -1,0 +1,3 @@
+== README
+
+Basic app to keep track of events developed with Ruby on Rails
